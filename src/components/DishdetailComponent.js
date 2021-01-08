@@ -33,7 +33,7 @@ class DishDetail extends Component {
                 return (
                     <li key={single_comment.id}>
                         <p>{single_comment.comment}</p>
-                        <p>{single_comment.author}, {single_comment.date}</p>
+                        <p>{single_comment.author}, {new Intl.DateTimeFormat('en-US', { year: 'numeric', month: 'short', day: '2-digit'}).format(new Date(Date.parse(single_comment.date)))}</p>
                     </li>
                 )
             })
@@ -57,10 +57,13 @@ class DishDetail extends Component {
             const dish_selected = this.renderDish(dish)
             const dish_selected_comment = this.renderDetail(dish.comments)
             return (
-                <div className='row'>
-                    {dish_selected}
-                    {dish_selected_comment}
+                <div class="container">
+                    <div className='row'>
+                        {dish_selected}
+                        {dish_selected_comment}
+                    </div>
                 </div>
+                
             )
         }
         else {
