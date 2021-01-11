@@ -3,12 +3,7 @@ import { Card, CardImg, CardImgOverlay, CardText, CardBody,
     CardTitle } from 'reactstrap';
 
 
-class DishDetail extends Component {
-    constructor(props) {
-        super(props);
-    }
-
-    renderDish(dish) {
+    function RenderDish({dish}) {
         if (dish != null)
             return(
                 <div className="col-12  col-md-5  m-1">
@@ -27,7 +22,7 @@ class DishDetail extends Component {
             );
     }
 
-    renderDetail(comments) {
+    function RenderDetail({comments}) {
         if (comments != null) {
             const dish_comment = comments.map(single_comment => {
                 return (
@@ -51,29 +46,22 @@ class DishDetail extends Component {
         }
     }
 
-    render() {
-        const dish = this.props.dish
-        if(dish != null){
-            const dish_selected = this.renderDish(dish)
-            const dish_selected_comment = this.renderDetail(dish.comments)
+    const DishDetail = props => {
+        if (props.dish) {
             return (
-                <div class="container">
-                    <div className='row'>
-                        {dish_selected}
-                        {dish_selected_comment}
+                <div className="container">
+                    <div className="row">
+                        <RenderDish dish={props.dish} />
+                        <RenderDetail comments={props.dish.comments} />
                     </div>
                 </div>
-                
-            )
+            );
         }
         else {
             return (
                 <div></div>
-            )
+            );
         }
     }
-
-    
-}
 
 export default DishDetail
