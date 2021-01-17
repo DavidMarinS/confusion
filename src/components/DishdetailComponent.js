@@ -107,8 +107,8 @@ class CommentForm extends Component {
     render() {
         return(
             <div>
-               <Button onClick={this.toggleModal}>
-               <span className="fa fa-edit fa-lg"></span> Send Comments
+               <Button className="bg-white text-dark" onClick={this.toggleModal}>
+               <i className="fa fa-pencil fa-lg"></i> Send Comments
                 </Button>
                 <Modal isOpen={this.state.isModalOpen} toggle={this.toggleModal}>
                     <ModalHeader toggle={this.toggleModal}>Submit Comment</ModalHeader>
