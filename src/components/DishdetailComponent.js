@@ -6,19 +6,26 @@ import { Link } from 'react-router-dom';
 import { Control, LocalForm, Errors } from 'react-redux-form';
 import { Loading } from './LoadingComponent';
 import { baseUrl } from '../shared/baseUrl';
+import { FadeTransform, Fade, Stagger } from 'react-animation-components';
 
 
 function RenderDish({dish}) {
     if (dish != null)
         return(
             <div className="col-12  col-md-5  m-1">
+                <FadeTransform
+                in
+                transformProps={{
+                    exitTransform: 'scale(0.5) translateY(-50%)'
+                }}>
                 <Card>
-                <CardImg top src={baseUrl + dish.image} alt={dish.name} />
-                <CardBody>
-                    <CardTitle>{dish.name}</CardTitle>
-                    <CardText>{dish.description}</CardText>
-                </CardBody>
+                    <CardImg top src={baseUrl + dish.image} alt={dish.name} />
+                    <CardBody>
+                        <CardTitle>{dish.name}</CardTitle>
+                        <CardText>{dish.description}</CardText>
+                    </CardBody>
                 </Card>
+                </FadeTransform>
             </div>
         );
     else
@@ -31,10 +38,14 @@ function RenderDetail({comments, postComment, dishId}) {
     if (comments != null) {
         const dish_comment = comments.map(single_comment => {
             return (
-                <li key={single_comment.id}>
+                <Stagger in>
+                    <Fade in>
+                    <li key={single_comment.id}>
                     <p>{single_comment.comment}</p>
                     <p>{single_comment.author}, {new Intl.DateTimeFormat('en-US', { year: 'numeric', month: 'short', day: '2-digit'}).format(new Date(Date.parse(single_comment.date)))}</p>
-                </li>
+                    </li>
+                    </Fade>
+                </Stagger>
             )
         })
         return (
